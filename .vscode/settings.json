@@ -1,4 +1,5 @@
 {
+	"editor.defaultFormatter": "biomejs.biome",
 	"search.exclude": {
 		"dist/": true,
 		"node_modules/": true,

@@ -2,6 +2,24 @@
 	"tasks": [
 		{
 			"type": "npm",
+			"script": "check",
+			"problemMatcher": [],
+			"label": "check"
+		},
+		{
+			"type": "npm",
+			"script": "check.fmt",
+			"problemMatcher": [],
+			"label": "check.fmt"
+		},
+		{
+			"type": "npm",
+			"script": "fmt",
+			"problemMatcher": [],
+			"label": "fmt"
+		},
+		{
+			"type": "npm",
 			"script": "install",
 			"problemMatcher": [],
 			"label": "install"
