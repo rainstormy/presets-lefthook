@@ -1,0 +1,1 @@
+{"$schema":"https://json.schemastore.org/lefthook.json","post-checkout":{"scripts":{"post-checkout-fnm-install-on-engine-change.sh":{"runner":"bash"}}},"post-rewrite":{"scripts":{"post-rewrite-fnm-install-on-engine-change.sh":{"runner":"bash","use_stdin":true}}}}

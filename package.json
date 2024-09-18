@@ -14,6 +14,7 @@
 		"node": ">=20.0.0"
 	},
 	"scripts": {
+		"build": "node ./build.js",
 		"check": "pnpm check.fmt",
 		"check.fmt": "biome check --error-on-warnings",
 		"fmt": "biome check --write"

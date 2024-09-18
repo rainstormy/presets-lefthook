@@ -3,5 +3,25 @@
 	"extends": ["@rainstormy/presets-biome/base"],
 	"files": {
 		"ignore": ["dist/"]
-	}
+	},
+	"overrides": [
+		{
+			"include": ["build.js"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noNodejsModules": "off"
+					},
+					"style": {
+						"useFilenamingConvention": {
+							"level": "error",
+							"options": {
+								"filenameCases": ["kebab-case"]
+							}
+						}
+					}
+				}
+			}
+		}
+	]
 }
