@@ -1,6 +1,13 @@
 {
 	"$schema": "https://json.schemastore.org/package.json",
 	"private": true,
+	"bugs": "https://github.com/rainstormy/presets-lefthook/issues",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rainstormy/presets-lefthook.git"
+	},
+	"license": "MIT",
+	"author": "Steffen Diswal",
 	"type": "module",
 	"packageManager": "pnpm@9.5.0+sha256.dbdf5961c32909fb030595a9daa1dae720162e658609a8f92f2fa99835510ca5",
 	"engines": {
