@@ -2,14 +2,14 @@
 	"$schema": "https://json.schemastore.org/lefthook.json",
 	"post-checkout": {
 		"scripts": {
-			"post-checkout-pnpm-install-on-lockfile-change.sh": {
+			"post-checkout-dependencies-all.sh": {
 				"runner": "bash"
 			}
 		}
 	},
 	"post-rewrite": {
 		"scripts": {
-			"post-rewrite-pnpm-install-on-lockfile-change.sh": {
+			"post-rewrite-dependencies-all.sh": {
 				"runner": "bash",
 				"use_stdin": true
 			}

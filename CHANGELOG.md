@@ -7,8 +7,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 ### Added
 - [MIT license](https://choosealicense.com/licenses/mit).
-- New preset: `dist/fnm-install-on-engine-change.json`.
-- New preset: `dist/nvm-install-on-nvmrc-change.json`.
-- New preset: `dist/pnpm-install-on-lockfile-change.json`.
+- New preset: `dependencies.json`.
 
 [unreleased]: https://github.com/rainstormy/presets-lefthook
