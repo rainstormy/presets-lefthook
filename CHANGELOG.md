@@ -8,5 +8,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 - [MIT license](https://choosealicense.com/licenses/mit).
 - New preset: `dependencies.json`.
+- New preset: `quality-assurance.json`.
 
 [unreleased]: https://github.com/rainstormy/presets-lefthook
