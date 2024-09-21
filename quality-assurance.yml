@@ -1,0 +1,16 @@
+pre-commit:
+  scripts:
+    pre-commit-quality-assurance-fmt.sh:
+      runner: bash
+      stage_fixed: true
+  skip:
+    - merge
+    - rebase
+
+pre-push:
+  parallel: true
+  scripts:
+    pre-push-quality-assurance-check.sh:
+      runner: bash
+    pre-push-quality-assurance-test.sh:
+      runner: bash

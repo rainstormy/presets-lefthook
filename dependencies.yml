@@ -1,0 +1,10 @@
+post-checkout:
+  scripts:
+    post-checkout-dependencies-all.sh:
+      runner: bash
+
+post-rewrite:
+  scripts:
+    post-rewrite-dependencies-all.sh:
+      runner: bash
+      use_stdin: true

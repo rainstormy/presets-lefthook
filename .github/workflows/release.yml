@@ -49,12 +49,6 @@ jobs:
           # Use a separate access token with permission to commit and push.
           token: ${{ secrets.BOT_NIMBUS_GH_AUTH_TOKEN }}
         #
-      - name: Restore build artifacts
-        uses: ./.github/actions/build-artifacts
-        #
-      - name: Move build artifacts to the project root directory
-        run: mv --force dist/*.json ./
-        #
       - name: Update release artifacts
         uses: rainstormy-actions/updraft@a56005ba6b1ecf4c9f63c5b8f1354c0e081cc5b2 # v1.1.0
         with:

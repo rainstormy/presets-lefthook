@@ -1,5 +1,5 @@
 # This workflow implements the continuous integration (CI) pipeline.
-# It validates the software quality and produces build artifacts that can be deployed at a later stage.
+# It validates the software quality.
 #
 # It is triggered automatically by pull requests opened towards the `main` branch.
 #
@@ -32,36 +32,6 @@ concurrency:
 # All third-party actions are pinned to a specific commit SHA for security reasons.
 # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-third-party-actions
 jobs:
-  can-build-project:
-    name: Can build the project
-    runs-on: ubuntu-24.04
-    timeout-minutes: 1
-    permissions:
-      contents: read # Allow the job to check out the repository.
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-        #
-      - name: Skip if already built
-        id: skip-if-already-built
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
-        with:
-          # If an exact cache hit occurs, another workflow run on this branch has already built the project in the current configuration, and we can skip the rest of the job.
-          # This is especially useful upon rebasing interactively.
-          #
-          # CAUTION: The cache key is repeated in `.github/actions/build-artifacts/action.yml` to restore the build artifacts.
-          key: can-build-project-${{ runner.os }}-sha256:${{ hashFiles('src/**/*', '*.js', '.nvmrc', 'pnpm-lock.yaml') }}
-          path: dist/
-        #
-      - name: Install pnpm and third-party dependencies
-        if: (steps.skip-if-already-built.outputs.cache-hit != 'true' || github.run_attempt > 1) && !cancelled()
-        uses: ./.github/actions/pnpm
-        #
-      - name: Build the project
-        if: (steps.skip-if-already-built.outputs.cache-hit != 'true' || github.run_attempt > 1) && !cancelled()
-        # language=sh
-        run: pnpm build
-
   has-clean-code:
     name: Has clean code
     runs-on: ubuntu-24.04
@@ -78,20 +48,8 @@ jobs:
         with:
           # If an exact cache hit occurs, another workflow run on this branch has already verified that the source code is clean in the current configuration, and we can skip the rest of the job.
           # This is especially useful upon rebasing interactively.
-          key: has-clean-code-${{ runner.os }}-sha256:${{ hashFiles('.github/**/*', '.vscode/*.json', 'src/**/*', '*.js', '*.json', '.nvmrc', 'pnpm-lock.yaml') }}
-          path: node_modules/.cache/biome/
-        #
-      - name: Install pnpm and third-party dependencies
-        if: (steps.skip-if-already-verified.outputs.cache-hit != 'true' || github.run_attempt > 1) && !cancelled()
-        uses: ./.github/actions/pnpm
-        #
-      - name: Verify that the source code is well-formatted
-        if: (steps.skip-if-already-verified.outputs.cache-hit != 'true' || github.run_attempt > 1) && !cancelled()
-        # language=sh
-        run: |
-          pnpm check.fmt
-          mkdir --parents node_modules/.cache/biome/
-          touch node_modules/.cache/biome/.well-formatted
+          key: has-clean-code-${{ runner.os }}-sha256:${{ hashFiles('.lefthook/**/*.sh') }}
+          path: node_modules/.cache/shellcheck/
         #
       - name: Verify that the shell scripts are clean
         # language=sh
@@ -100,6 +58,8 @@ jobs:
               echo "Checking $FILE"
               shellcheck --shell bash --severity warning "$FILE"
           done
+          mkdir --parents node_modules/.cache/shellcheck/
+          touch node_modules/.cache/shellcheck/.clean
 
   has-standardised-commit-messages:
     name: Has standardised commit messages
