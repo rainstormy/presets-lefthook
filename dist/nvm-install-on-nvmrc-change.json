@@ -1,1 +1,0 @@
-{"$schema":"https://json.schemastore.org/lefthook.json","post-checkout":{"scripts":{"post-checkout-nvm-install-on-nvmrc-change.sh":{"runner":"bash"}}},"post-rewrite":{"scripts":{"post-rewrite-nvm-install-on-nvmrc-change.sh":{"runner":"bash","use_stdin":true}}}}

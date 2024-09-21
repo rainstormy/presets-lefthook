@@ -2,6 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises"
 
 const sourceDirectory = "src"
 const destinationDirectory = "dist"
+const reservedFilenames = ["biome.json", "package.json"]
 
 await mkdir(destinationDirectory, { recursive: true })
 
@@ -13,6 +14,10 @@ function isJsonWithComments(filename) {
 }
 
 async function buildFile(filename) {
+	if (reservedFilenames.includes(filename)) {
+		throw new Error(`${filename}: Reserved filename.`)
+	}
+
 	const sourcePath = `${sourceDirectory}/${filename}`
 	const destinationPath = `${destinationDirectory}/${filename.slice(0, -1)}`
 
