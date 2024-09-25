@@ -57,6 +57,11 @@ For Node.js packages:
 - If `yarn.lock` has changed, [Yarn](https://yarnpkg.com) installs unplugged
   packages in `.yarn/unplugged`.
 
+For [Terraform](https://www.terraform.io):
+- If [tfswitch](https://tfswitch.warrensbox.com) is installed and the
+  [`required_version`](https://developer.hashicorp.com/terraform/language/terraform#terraform-required_version)
+  field in `terraform/versions.tf` has changed, tfswitch installs Terraform.
+
 ### `quality-assurance.yml`
 This configuration validates the software quality before committing or pushing.
 

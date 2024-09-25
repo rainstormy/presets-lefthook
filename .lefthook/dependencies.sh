@@ -62,3 +62,16 @@ install_packages() {
 		echo "No package manager detected. Skipping package installation."
 	fi
 }
+
+install_terraform() {
+	if [[ -f 'terraform/versions.tf' ]] && command -v tfswitch > /dev/null 2>&1; then
+		if git diff "$1" "$2" -- 'terraform/versions.tf' | grep --quiet 'required_version = "'; then
+			echo "Terraform detected. No changes detected in 'required_version' in 'versions.tf'. Skipping 'tfswitch'."
+		else
+			echo "Terraform detected. Changes detected in 'required_version' in 'versions.tf'. Running 'tfswitch'."
+			tfswitch --chdir 'terraform'
+		fi
+	else
+		echo "No Terraform version manager detected. Skipping Terraform installation."
+	fi
+}

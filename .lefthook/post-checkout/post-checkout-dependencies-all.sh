@@ -15,3 +15,4 @@ fi
 echo "Evaluating changes between the former HEAD commit $FROM_SHA and the new HEAD commit $TO_SHA:"
 install_nodejs "$FROM_SHA" "$TO_SHA"
 install_packages "$FROM_SHA" "$TO_SHA"
+install_terraform "$FROM_SHA" "$TO_SHA"
