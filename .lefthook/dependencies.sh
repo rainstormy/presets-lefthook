@@ -1,5 +1,5 @@
 install_nodejs() {
-	if command -v fnm > /dev/null 2>&1; then
+	if [[ -f 'package.json' ]] && command -v fnm > /dev/null 2>&1; then
 		if git diff "$1" "$2" -- 'package.json' | grep --quiet '"node": "'; then
 			echo "fnm detected. No changes detected in 'engines.node' in 'package.json'. Skipping 'fnm install'."
 		else
