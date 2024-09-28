@@ -5,6 +5,7 @@ install_nodejs() {
 		else
 			echo "fnm detected. Changes detected in 'engines.node' in 'package.json'. Running 'fnm install'."
 			fnm install --resolve-engines
+			fnm use
 
 			if [[ -f 'pnpm-lock.yaml' ]]; then
 				echo "pnpm detected. Running 'corepack enable'."
@@ -22,7 +23,10 @@ install_nodejs() {
 			echo "nvm detected. Changes detected in '.nvmrc'. Running 'nvm install'."
 			source "$HOME/.nvm/nvm.sh"
 			nvm install
-			nvm alias default "$(cat '.nvmrc')"
+
+			NODE_VERSION="$(cat '.nvmrc')"
+			nvm alias default "$NODE_VERSION"
+			echo "The default Node.js version is now '$NODE_VERSION'."
 
 			if [[ -f 'pnpm-lock.yaml' ]]; then
 				echo "pnpm detected. Running 'corepack enable'."
