@@ -5,6 +5,7 @@ install_nodejs() {
 		else
 			echo "fnm detected. Changes detected in 'engines.node' in 'package.json'. Running 'fnm install'."
 			fnm install --resolve-engines
+			fnm use
 
 			if [[ -f 'pnpm-lock.yaml' ]]; then
 				echo "pnpm detected. Running 'corepack enable'."
