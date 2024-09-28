@@ -48,6 +48,10 @@ For Node.js engines:
   nvm installs Node.js and enables Corepack (only when
   using [pnpm](https://pnpm.io) or [Yarn](https://yarnpkg.com)).
 
+> [!CAUTION]  
+> When using nvm, it sets the default Node.js version on the computer to be the
+> one specified in `.nvmrc`.
+
 For Node.js packages:
 - If `package-lock.json` has changed,
   [npm](https://nodejs.org/en/learn/getting-started/an-introduction-to-the-npm-package-manager)
