@@ -42,9 +42,11 @@ HEAD commit.
 For Node.js engines:
 - If [fnm](https://github.com/Schniz/fnm) is installed and the
   [`node` engine](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#engines)
-  in `package.json` has changed, fnm installs Node.js and enables Corepack.
+  in `package.json` has changed, fnm installs Node.js and enables Corepack (only
+  when using [pnpm](https://pnpm.io) or [Yarn](https://yarnpkg.com)).
 - If [nvm](https://github.com/nvm-sh/nvm) is installed and `.nvmrc` has changed,
-  nvm installs Node.js and enables Corepack.
+  nvm installs Node.js and enables Corepack (only when
+  using [pnpm](https://pnpm.io) or [Yarn](https://yarnpkg.com)).
 
 For Node.js packages:
 - If `package-lock.json` has changed,

@@ -4,7 +4,15 @@ install_nodejs() {
 			echo "fnm detected. No changes detected in 'engines.node' in 'package.json'. Skipping 'fnm install'."
 		else
 			echo "fnm detected. Changes detected in 'engines.node' in 'package.json'. Running 'fnm install'."
-			fnm install --corepack-enabled --install-if-missing --resolve-engines --version-file-strategy recursive
+			fnm install --resolve-engines
+
+			if [[ -f 'pnpm-lock.yaml' ]]; then
+				echo "pnpm detected. Running 'corepack enable'."
+				corepack enable
+			elif [[ -f 'yarn.lock' ]]; then
+				echo "Yarn detected. Running 'corepack enable'."
+				corepack enable
+			fi
 		fi
 
 	elif [[ -f '.nvmrc' && -f "$HOME/.nvm/nvm.sh" ]]; then
@@ -15,7 +23,14 @@ install_nodejs() {
 			source "$HOME/.nvm/nvm.sh"
 			nvm install
 			nvm alias default "$(cat '.nvmrc')"
-			corepack enable
+
+			if [[ -f 'pnpm-lock.yaml' ]]; then
+				echo "pnpm detected. Running 'corepack enable'."
+				corepack enable
+			elif [[ -f 'yarn.lock' ]]; then
+				echo "Yarn detected. Running 'corepack enable'."
+				corepack enable
+			fi
 		fi
 
 	else
