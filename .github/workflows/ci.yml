@@ -52,6 +52,7 @@ jobs:
           path: node_modules/.cache/shellcheck/
         #
       - name: Verify that the shell scripts are clean
+        if: (steps.skip-if-already-verified.outputs.cache-hit != 'true' || github.run_attempt > 1) && !cancelled()
         # language=sh
         run: |
           for FILE in .lefthook/**/*.sh; do
