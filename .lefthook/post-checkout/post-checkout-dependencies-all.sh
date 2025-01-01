@@ -13,6 +13,5 @@ elif [[ ! "$TO_SHA" =~ ^[0-9a-f]{40}$ ]]; then
 fi
 
 echo "Evaluating changes between the former HEAD commit $FROM_SHA and the new HEAD commit $TO_SHA:"
-install_nodejs "$FROM_SHA" "$TO_SHA"
-install_packages "$FROM_SHA" "$TO_SHA"
-install_terraform "$FROM_SHA" "$TO_SHA"
+install_devtools "$FROM_SHA" "$TO_SHA"
+install_nodejs_packages "$FROM_SHA" "$TO_SHA"

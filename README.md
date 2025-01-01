@@ -39,7 +39,12 @@ HEAD commit.
 > Use this configuration to avoid having to manually run `npm install` etc. when
 > you check out a branch or rebase a branch onto `main`.
 
-For Node.js engines:
+If [mise-en-place](https://mise.jdx.dev) is installed and `mise.toml` has
+changed, mise-en-place installs all relevant development tools in your project,
+as defined by the [`[tools]` section](https://mise.jdx.dev/dev-tools) in
+`mise.toml`.
+
+Otherwise:
 - If [fnm](https://github.com/Schniz/fnm) is installed and the
   [`node` engine](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#engines)
   in `package.json` has changed, fnm installs Node.js and enables Corepack (only
@@ -47,6 +52,10 @@ For Node.js engines:
 - If [nvm](https://github.com/nvm-sh/nvm) is installed and `.nvmrc` has changed,
   nvm installs Node.js and enables Corepack (only when
   using [pnpm](https://pnpm.io) or [Yarn](https://yarnpkg.com)).
+- If [tfswitch](https://tfswitch.warrensbox.com) is installed and the
+  [`required_version`](https://developer.hashicorp.com/terraform/language/terraform#terraform-required_version)
+  field in `terraform/versions.tf` has changed, tfswitch
+  installs [Terraform](https://www.terraform.io).
 
 > [!CAUTION]  
 > When using nvm, it sets the default Node.js version on the computer to be the
@@ -63,11 +72,6 @@ For Node.js packages:
 - If `yarn.lock` has changed, [Yarn](https://yarnpkg.com) installs unplugged
   packages in `.yarn/unplugged`.
 
-For [Terraform](https://www.terraform.io):
-- If [tfswitch](https://tfswitch.warrensbox.com) is installed and the
-  [`required_version`](https://developer.hashicorp.com/terraform/language/terraform#terraform-required_version)
-  field in `terraform/versions.tf` has changed, tfswitch installs Terraform.
-
 ### `quality-assurance.yml`
 This configuration validates the software quality before committing or pushing.
 
@@ -76,11 +80,28 @@ This configuration validates the software quality before committing or pushing.
 - Before pushing, it runs the tasks named `check` and `test` in parallel to
   validate the software quality.
 
-It aborts the commit or push operation if any of the tasks fail.
+It aborts the commit or push operation if any of the tasks fail. It skips any
+undefined tasks.
 
 > [!TIP]  
 > Commit or push with the `--no-verify` option to skip the validation procedure
 > once.
+
+When using [mise-en-place](https://mise.jdx.dev) as task runner, it expects the
+tasks to be defined
+in [`mise.toml`](https://mise.jdx.dev/tasks/#tasks-in-mise-toml-files).
+
+For example:
+```toml
+[tasks.check]
+run = "biome check --error-on-warnings && tsc"
+
+[tasks.fmt]
+run = "biome check --write"
+
+[tasks.test]
+run = "vitest run"
+```
 
 When using the [Just](https://just.systems) task runner, it expects the tasks to
 be defined as [recipes in the `justfile`](https://just.systems/man/en).
