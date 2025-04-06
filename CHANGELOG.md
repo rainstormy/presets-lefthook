@@ -5,6 +5,9 @@ on [Keep a Changelog](https://keepachangelog.com/en/1.1.0), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Make failing tasks in `quality-assurance.yml` return a non-zero exit code to
+  prevent the commit or the push operation from happening.
 
 ## [1.1.0] - 2025-01-01
 ### Added
