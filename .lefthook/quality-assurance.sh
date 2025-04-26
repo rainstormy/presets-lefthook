@@ -26,7 +26,7 @@ run_task() {
 	fi
 
 	if [[ -f 'package.json' ]]; then
-		if sed -n '/"scripts": {/,/}/p' 'package.json' | grep --perl-regexp --quiet "\"$1\": \""; then
+		if sed -n '/"scripts": {/,/}/p' 'package.json' | grep --quiet "\"$1\": \""; then
 			# pnpm
             # https://pnpm.io
 			if [[ -f 'pnpm-lock.yaml' ]]; then
